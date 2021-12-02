@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
-const { createCanvas, loadImage } = require("canvas");
+const fs = require('fs');
+const path = require('path');
+const {createCanvas, loadImage} = require('canvas');
 const basePath = process.cwd();
 const buildDir = `${basePath}/build/json`;
 const inputDir = `${basePath}/build/images`;
@@ -10,14 +10,14 @@ const {
   description,
   baseUri,
 } = require(`${basePath}/src/config.js`);
-const console = require("console");
+const console = require('console');
 const canvas = createCanvas(format.width, format.height);
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext('2d');
 const metadataList = [];
 
 const buildSetup = () => {
   if (fs.existsSync(buildDir)) {
-    fs.rmdirSync(buildDir, { recursive: true });
+    fs.rmdirSync(buildDir, {recursive: true});
   }
   fs.mkdirSync(buildDir);
 };
@@ -28,7 +28,7 @@ const getImages = (_dir) => {
       .readdirSync(_dir)
       .filter((item) => {
         let extension = path.extname(`${_dir}${item}`);
-        if (extension == ".png" || extension == ".jpg") {
+        if (extension == '.png' || extension == '.jpg') {
           return item;
         }
       })
@@ -46,7 +46,7 @@ const getImages = (_dir) => {
 const loadImgData = async (_imgObject) => {
   return new Promise(async (resolve) => {
     const image = await loadImage(`${_imgObject.path}`);
-    resolve({ imgObject: _imgObject, loadedImage: image });
+    resolve({imgObject: _imgObject, loadedImage: image});
   });
 };
 
@@ -63,14 +63,14 @@ const addRarity = () => {
   let count = 0;
   let imgdata = ctx.getImageData(0, 0, w, h);
   let rgb = imgdata.data;
-  let newRgb = { r: 0, g: 0, b: 0 };
+  let newRgb = {r: 0, g: 0, b: 0};
   const tolerance = 15;
-  const rareColorBase = "NOT a Hot Dog";
+  const rareColorBase = 'NOT a Hot Dog';
   const rareColor = [
-    { name: "Hot Dog", rgb: { r: 192, g: 158, b: 131 } },
-    { name: "Hot Dog", rgb: { r: 128, g: 134, b: 90 } },
-    { name: "Hot Dog", rgb: { r: 113, g: 65, b: 179 } },
-    { name: "Hot Dog", rgb: { r: 162, g: 108, b: 67 } },
+    {name: 'Hot Dog', rgb: {r: 192, g: 158, b: 131}},
+    {name: 'Hot Dog', rgb: {r: 128, g: 134, b: 90}},
+    {name: 'Hot Dog', rgb: {r: 113, g: 65, b: 179}},
+    {name: 'Hot Dog', rgb: {r: 162, g: 108, b: 67}},
   ];
 
   while ((i += 10 * 4) < rgb.length) {
@@ -97,15 +97,15 @@ const addRarity = () => {
 
   return [
     {
-      trait_type: "average color",
+      trait_type: 'average color',
       value: `rgb(${newRgb.r},${newRgb.g},${newRgb.b})`,
     },
     {
-      trait_type: "What is this?",
+      trait_type: 'What is this?',
       value: rarity,
     },
     {
-      trait_type: "date",
+      trait_type: 'date',
       value: randomIntFromInterval(1500, 1900),
     },
   ];
@@ -126,7 +126,7 @@ isNeighborColor = (color1, color2, tolerance) => {
 const saveMetadata = (_loadedImageObject) => {
   let shortName = _loadedImageObject.imgObject.filename.replace(
     /\.[^/.]+$/,
-    ""
+    ''
   );
 
   let tempAttributes = [];
@@ -138,7 +138,7 @@ const saveMetadata = (_loadedImageObject) => {
     image: `${baseUri}/${shortName}.png`,
     edition: Number(shortName),
     attributes: tempAttributes,
-    compiler: "HashLips Art Engine",
+    compiler: 'JunkFish Art Engine',
   };
   fs.writeFileSync(
     `${buildDir}/${shortName}.json`,
@@ -154,7 +154,7 @@ const writeMetaData = (_data) => {
 const startCreating = async () => {
   const images = getImages(inputDir);
   if (images == null) {
-    console.log("Please generate collection first.");
+    console.log('Please generate collection first.');
     return;
   }
   let loadedImageObjects = [];

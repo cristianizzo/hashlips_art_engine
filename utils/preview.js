@@ -1,9 +1,9 @@
 const basePath = process.cwd();
-const fs = require("fs");
-const { createCanvas, loadImage } = require("canvas");
+const fs = require('fs');
+const {createCanvas, loadImage} = require('canvas');
 const buildDir = `${basePath}/build`;
 
-const { preview } = require(`${basePath}/src/config.js`);
+const {preview} = require(`${basePath}/src/config.js`);
 
 // read json data
 const rawdata = fs.readFileSync(`${basePath}/build/json/_metadata.json`);
@@ -11,7 +11,7 @@ const metadataList = JSON.parse(rawdata);
 
 const saveProjectPreviewImage = async (_data) => {
   // Extract from preview config
-  const { thumbWidth, thumbPerRow, imageRatio, imageName } = preview;
+  const {thumbWidth, thumbPerRow, imageRatio, imageName} = preview;
   // Calculate height on the fly
   const thumbHeight = thumbWidth * imageRatio;
   // Prepare canvas
@@ -26,10 +26,10 @@ const saveProjectPreviewImage = async (_data) => {
   // Initiate the canvas now that we have calculated everything
   const previewPath = `${buildDir}/${imageName}`;
   const previewCanvas = createCanvas(previewCanvasWidth, previewCanvasHeight);
-  const previewCtx = previewCanvas.getContext("2d");
+  const previewCtx = previewCanvas.getContext('2d');
 
   // Iterate all NFTs and insert thumbnail into preview image
-  // Don't want to rely on "edition" for assuming index
+  // Don't want to rely on 'edition' for assuming index
   for (let index = 0; index < _data.length; index++) {
     const nft = _data[index];
     await loadImage(`${buildDir}/images/${nft.edition}.png`).then((image) => {
@@ -44,7 +44,7 @@ const saveProjectPreviewImage = async (_data) => {
   }
 
   // Write Project Preview to file
-  fs.writeFileSync(previewPath, previewCanvas.toBuffer("image/png"));
+  fs.writeFileSync(previewPath, previewCanvas.toBuffer('image/png'));
   console.log(`Project preview image located at: ${previewPath}`);
 };
 
