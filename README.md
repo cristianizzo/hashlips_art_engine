@@ -4,6 +4,10 @@
 
 All the code in these repos was created and explained by HashLips on the main YouTube channel.
 
+Playlist:
+
+[📺 YouTube](https://www.youtube.com/watch?v=nphmxQgfNb8&list=PLwXSCBuwy1QuSccdzqB6coWYDhJCx-CRk&index=1)
+
 To find out more please visit:
 
 [📺 YouTube](https://www.youtube.com/channel/UC1LV4_VQGBJHTJjEWUmy8nA)

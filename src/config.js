@@ -6,14 +6,13 @@ const totalCollection = 10;
 const imgWidth = 448;
 const imgHeight = 448;
 const network = NETWORK.eth;
-
-// General metadata for Ethereum
+const symbol = 'JFH';
 const namePrefix = 'JunkFish';
 const description = '';
 const baseUri = 'ipfs://Qmb7kr9xqSt6yVLAxgcHLno4SvkmbC8SnKsXJxEte6vNhf';
 
 const solanaMetadata = {
-  symbol: 'YC',
+  symbol: symbol,
   seller_fee_basis_points: 1000, // Define how much % you want from secondary market sales 1000 = 10%
   external_url: 'https://www.youtube.com/c/hashlipsnft',
   creators: [
@@ -81,7 +80,7 @@ const background = {
 };
 
 const extraMetadata = {
-  creator: 'Junk Fish Club',
+  creator: 'JunkFish Club',
 };
 
 const rarityDelimiter = '#';
